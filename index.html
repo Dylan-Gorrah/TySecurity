@@ -92,11 +92,12 @@
     padding-top: 100px;
   }
   .hero-company {
-    font-size: 12px; font-weight: 700; letter-spacing: 3.5px;
-    text-transform: uppercase; color: rgba(255,255,255,0.45);
-    margin-bottom: 18px;
+    font-size: clamp(38px, 5.5vw, 72px); font-weight: 900;
+    letter-spacing: -1.5px; color: var(--white);
+    line-height: 1.05; margin-bottom: 20px;
     animation: fadeUp 0.8s ease both;
   }
+  .hero-company span { color: var(--green); }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(141,198,63,0.15); border: 1px solid rgba(141,198,63,0.4);
@@ -495,7 +496,7 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-company">Tyume Security Services</div>
+    <div class="hero-company"><span>Tyume</span> Security Services</div>
     <div class="hero-badge"><span class="pulse-dot"></span> South Africa's Trusted Security Partner</div>
     <h1 class="hero-title">Protection<br>Is Our<br><em>Business.</em></h1>
     <p class="hero-subtitle">Tactical security solutions for businesses and high-value sites across South Africa. Armed response, fully-equipped guards, and a free risk assessment — zero compromise.</p>
@@ -816,7 +817,7 @@
 <!-- FOOTER -->
 <footer>
   <img src="img/LOGO Tyume Security Services.jpeg" alt="Tyume Security Services">
-  <p class="footer-text">© 2024 Tyume Security Services. All rights reserved. No 1 IvyGcina Street, Tambo Village, Manenberg 7767, Cape Town.</p>
+  <p class="footer-text">© 2022–2026 Tyume Security Services. All rights reserved. No 1 IvyGcina Street, Tambo Village, Manenberg 7767, Cape Town.</p>
   <div class="footer-links">
     <a href="tel:0614058792">061 405 8792</a>
     <a href="mailto:tyumeservices@gmail.com">tyumeservices@gmail.com</a>
