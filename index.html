@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tyume Security Services | Protection Is Our Business</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --navy-light: #1a2f5e;
+    --green: #8dc63f;
+    --green-dark: #6fa832;
+    --cyan: #29abe2;
+    --white: #ffffff;
+    --gray: #f5f6fa;
+    --text-muted: #8a9bb5;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5%;
+    background: rgba(13, 27, 62, 0.0);
+    backdrop-filter: blur(0px);
+    transition: all 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(13, 27, 62, 0.97);
+    backdrop-filter: blur(20px);
+    padding: 12px 5%;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.4);
+  }
+  .nav-logo img { height: 52px; transition: height 0.3s; }
+  nav.scrolled .nav-logo img { height: 40px; }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85); text-decoration: none;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: var(--green); color: var(--navy) !important;
+    padding: 11px 24px; border-radius: 6px; font-weight: 700 !important;
+    font-size: 14px !important; letter-spacing: 0.3px;
+    transition: all 0.2s !important;
+    box-shadow: 0 4px 20px rgba(141,198,63,0.35);
+  }
+  .nav-cta:hover { background: var(--green-dark) !important; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(141,198,63,0.5) !important; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: url('img/poster.jpeg') center top/cover no-repeat;
+    transform: scale(1.08);
+    animation: heroZoom 12s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1.0); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(13,27,62,0.92) 0%,
+      rgba(13,27,62,0.75) 50%,
+      rgba(13,27,62,0.2) 100%
+    );
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 5%; max-width: 780px;
+    padding-top: 100px;
+  }
+  .hero-company {
+    font-size: 12px; font-weight: 700; letter-spacing: 3.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    margin-bottom: 18px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(141,198,63,0.15); border: 1px solid rgba(141,198,63,0.4);
+    padding: 7px 16px; border-radius: 100px; margin-bottom: 28px;
+    font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: var(--green);
+    text-transform: uppercase;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; animation: pulse 1.8s infinite; }
+  .icon { display:inline-flex; align-items:center; justify-content:center; }
+  .icon svg { fill: currentColor; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+  .hero-title {
+    font-size: clamp(42px, 6vw, 82px);
+    font-weight: 900; line-height: 1.0;
+    letter-spacing: -2px;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title em { font-style: normal; color: var(--green); }
+  .hero-subtitle {
+    margin-top: 22px;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 400; color: rgba(255,255,255,0.72);
+    line-height: 1.6; max-width: 560px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-actions {
+    margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green); color: var(--navy);
+    padding: 16px 32px; border-radius: 8px;
+    font-weight: 800; font-size: 16px; text-decoration: none;
+    box-shadow: 0 8px 32px rgba(141,198,63,0.4);
+    transition: all 0.25s; letter-spacing: 0.2px;
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 14px 40px rgba(141,198,63,0.55); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: transparent; color: var(--white);
+    padding: 16px 32px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.3);
+    font-weight: 600; font-size: 16px; text-decoration: none;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+  .btn-phone-icon { font-size: 20px; }
+
+  .hero-scroll {
+    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.4); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    animation: fadeIn 1s 1s ease both;
+  }
+  .scroll-arrow {
+    width: 24px; height: 24px; border-right: 2px solid rgba(255,255,255,0.4);
+    border-bottom: 2px solid rgba(255,255,255,0.4);
+    transform: rotate(45deg); animation: scrollBounce 1.6s infinite;
+  }
+  @keyframes scrollBounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(6px)} }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--green);
+    padding: 18px 5%;
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(24px, 5vw, 80px); flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 10px;
+    color: var(--navy); font-weight: 700; font-size: 14px; letter-spacing: 0.3px;
+  }
+  .trust-icon { font-size: 20px; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 5%; }
+  .section-label {
+    font-size: 12px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--green); margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4vw, 52px); font-weight: 900;
+    line-height: 1.1; letter-spacing: -1.5px;
+  }
+  .section-title em { font-style: normal; color: var(--green); }
+  .section-sub {
+    margin-top: 16px; color: var(--text-muted);
+    font-size: 17px; line-height: 1.6; max-width: 580px;
+  }
+
+  /* ── STATS ── */
+  #stats { background: var(--navy-light); padding: 70px 5%; }
+  .stats-layout {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  .stats-intro .section-title { font-size: clamp(26px, 3vw, 40px); }
+  .stats-intro .section-sub { font-size: 15px; margin-top: 12px; }
+  .stats-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; overflow: hidden;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    padding: 32px 28px; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+  .stat-card:nth-child(2n) { border-right: none; }
+  .stat-card:nth-child(3), .stat-card:nth-child(4) { border-bottom: none; }
+  .stat-card:hover { background: rgba(141,198,63,0.06); }
+  .stat-num {
+    font-size: clamp(36px, 4vw, 52px); font-weight: 900;
+    color: var(--green); line-height: 1;
+    letter-spacing: -1.5px;
+  }
+  .stat-suffix { color: var(--cyan); }
+  .stat-label {
+    margin-top: 8px; font-size: 12px; color: var(--text-muted);
+    font-weight: 500; letter-spacing: 0.3px;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--navy); }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px; margin-top: 48px;
+  }
+  .service-card {
+    background: var(--navy-light);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px; padding: 26px 22px;
+    cursor: pointer; position: relative; overflow: hidden;
+    transition: all 0.3s;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 2px; background: var(--green);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .service-card.open, .service-card:hover { border-color: rgba(141,198,63,0.25); }
+  .service-card.open::before, .service-card:hover::before { transform: scaleX(1); }
+  .service-card-top { display: flex; align-items: center; gap: 14px; }
+  .service-icon { flex-shrink: 0; display: flex; }
+  .service-title { font-size: 15px; font-weight: 700; line-height: 1.3; flex: 1; }
+  .service-chevron {
+    margin-left: auto; flex-shrink: 0;
+    color: var(--text-muted); transition: transform 0.3s, color 0.3s;
+  }
+  .service-card.open .service-chevron { transform: rotate(180deg); color: var(--green); }
+  .service-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding-top: 0;
+  }
+  .service-card.open .service-body { max-height: 200px; padding-top: 16px; }
+  .service-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+  .service-free {
+    display: inline-block; margin-top: 12px;
+    background: rgba(141,198,63,0.12); color: var(--green);
+    font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+    padding: 4px 10px; border-radius: 100px; text-transform: uppercase;
+  }
+
+  /* ── WHY TYUME ── */
+  #why { background: var(--navy-light); }
+  .why-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center; margin-top: 20px;
+  }
+  .why-image-wrap {
+    position: relative; border-radius: 20px; overflow: hidden;
+    aspect-ratio: 4/5;
+  }
+  .why-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+  .why-image-badge {
+    position: absolute; bottom: 28px; left: 28px;
+    background: var(--green); color: var(--navy);
+    padding: 16px 22px; border-radius: 12px;
+    font-weight: 800; font-size: 15px;
+  }
+  .why-items { display: flex; flex-direction: column; gap: 30px; margin-top: 48px; }
+  .why-item { display: flex; gap: 22px; align-items: flex-start; }
+  .why-item-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: rgba(141,198,63,0.12); border: 1px solid rgba(141,198,63,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .why-item-text h4 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .why-item-text p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── TEAM CAROUSEL ── */
+  #team { background: var(--navy); overflow: hidden; }
+  .carousel-track-wrap { overflow: hidden; margin-top: 56px; border-radius: 16px; }
+  .carousel-track {
+    display: flex; gap: 20px;
+    animation: carouselScroll 30s linear infinite;
+    width: max-content;
+  }
+  .carousel-track:hover { animation-play-state: paused; }
+  @keyframes carouselScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .carousel-card {
+    width: 280px; height: 360px; flex-shrink: 0;
+    border-radius: 14px; overflow: hidden; position: relative;
+  }
+  .carousel-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .carousel-card:hover img { transform: scale(1.05); }
+  .carousel-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,27,62,0.9) 0%, transparent 50%);
+    display: flex; align-items: flex-end; padding: 22px;
+  }
+  .carousel-card-label { font-size: 13px; font-weight: 600; color: var(--green); letter-spacing: 0.5px; }
+
+  /* ── EQUIPMENT ── */
+  #equipment { background: var(--navy-light); }
+  .equipment-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 16px; }
+  .equipment-image { border-radius: 20px; overflow: hidden; aspect-ratio: 3/4; }
+  .equipment-image img { width: 100%; height: 100%; object-fit: cover; }
+  .equipment-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 40px;
+  }
+  .equip-item {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px; padding: 16px 18px;
+    font-size: 14px; font-weight: 600;
+    transition: all 0.25s;
+  }
+  .equip-item:hover { border-color: rgba(141,198,63,0.3); background: rgba(141,198,63,0.06); }
+  .equip-item span { font-size: 20px; }
+
+  /* ── FREE OFFER / CTA ── */
+  #offer {
+    background: var(--green);
+    padding: 90px 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 48px; flex-wrap: wrap;
+  }
+  .offer-content h2 {
+    font-size: clamp(32px, 4vw, 52px); font-weight: 900;
+    color: var(--navy); letter-spacing: -1.5px; line-height: 1.1;
+  }
+  .offer-content p { margin-top: 14px; font-size: 17px; color: rgba(13,27,62,0.72); max-width: 520px; line-height: 1.6; }
+  .offer-cta { flex-shrink: 0; }
+  .btn-dark {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--navy); color: var(--white);
+    padding: 18px 36px; border-radius: 8px;
+    font-weight: 800; font-size: 17px; text-decoration: none;
+    box-shadow: 0 12px 40px rgba(13,27,62,0.35);
+    transition: all 0.25s;
+  }
+  .btn-dark:hover { background: var(--navy-light); transform: translateY(-3px); box-shadow: 0 20px 50px rgba(13,27,62,0.5); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--navy); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; }
+  .contact-info { display: flex; flex-direction: column; gap: 30px; }
+  .contact-item { display: flex; gap: 20px; align-items: flex-start; }
+  .contact-item-icon {
+    width: 50px; height: 50px; border-radius: 12px;
+    background: rgba(141,198,63,0.1); border: 1px solid rgba(141,198,63,0.2);
+    display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+  }
+  .contact-item-text span { display: block; font-size: 12px; color: var(--text-muted); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .contact-item-text a, .contact-item-text p { color: var(--white); font-size: 16px; font-weight: 600; text-decoration: none; }
+  .contact-item-text a:hover { color: var(--green); }
+
+  .contact-form { background: var(--navy-light); border-radius: 20px; padding: 44px; border: 1px solid rgba(255,255,255,0.07); }
+  .contact-form h3 { font-size: 24px; font-weight: 800; margin-bottom: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: rgba(255,255,255,0.05);
+    border: 1.5px solid rgba(255,255,255,0.1); border-radius: 8px;
+    padding: 13px 16px; color: var(--white); font-family: 'Inter', sans-serif;
+    font-size: 15px; outline: none; transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--green); }
+  .form-group textarea { resize: none; height: 110px; }
+  .form-group select option { background: var(--navy-light); }
+  .btn-submit {
+    width: 100%; background: var(--green); color: var(--navy);
+    border: none; border-radius: 8px; padding: 16px;
+    font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 800;
+    cursor: pointer; transition: all 0.25s; letter-spacing: 0.3px;
+  }
+  .btn-submit:hover { background: var(--green-dark); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 36px 5%; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 20px;
+  }
+  footer img { height: 38px; }
+  .footer-text { font-size: 13px; color: var(--text-muted); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green); }
+
+  /* ── WHATSAPP FAB ── */
+  .whatsapp-fab {
+    position: fixed; bottom: 30px; right: 30px; z-index: 999;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #25d366; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.5);
+    text-decoration: none; font-size: 28px;
+    animation: fabPop 0.5s 2s cubic-bezier(0.34,1.56,0.64,1) both;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .whatsapp-fab:hover { transform: scale(1.1); box-shadow: 0 14px 44px rgba(37,211,102,0.65); }
+  @keyframes fabPop { from{opacity:0;transform:scale(0)} to{opacity:1;transform:scale(1)} }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(40px); transition: all 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+    .why-grid, .equipment-layout, .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    .why-image-wrap { aspect-ratio: 16/9; }
+    .equipment-image { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    #offer { flex-direction: column; text-align: center; }
+    .offer-content p { margin: 12px auto 0; }
+    .stats-layout { grid-template-columns: 1fr; gap: 32px; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 60px 4%; }
+    #stats { padding: 60px 4%; }
+    .hero-content { padding: 90px 4% 0; }
+    .hero-title { letter-spacing: -0.5px; }
+    .hero-actions { flex-direction: column; gap: 12px; }
+    .hero-actions a { justify-content: center; text-align: center; }
+    .btn-primary, .btn-secondary { width: 100%; padding: 15px 20px; font-size: 15px; }
+    .trust-bar { gap: 14px 28px; padding: 14px 4%; }
+    .trust-item { font-size: 12px; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .stat-card { padding: 24px 16px; }
+    .stat-num { font-size: 36px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-image-wrap { aspect-ratio: 4/3; }
+    .why-image-badge { bottom: 16px; left: 16px; padding: 12px 16px; font-size: 13px; }
+    .why-items { gap: 22px; margin-top: 32px; }
+    .carousel-card { width: 220px; height: 280px; }
+    .equipment-grid { grid-template-columns: 1fr 1fr; }
+    .contact-form { padding: 24px 18px; }
+    .contact-grid { gap: 32px; }
+    footer { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .footer-links { flex-wrap: wrap; gap: 12px; }
+    #offer { padding: 60px 4%; }
+    .offer-content h2 { font-size: 28px; }
+    .btn-dark { width: 100%; justify-content: center; font-size: 15px; padding: 15px 20px; }
+    .whatsapp-fab { bottom: 20px; right: 20px; width: 52px; height: 52px; }
+    .section-title { letter-spacing: -0.8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <a href="#hero"><img src="img/LOGO Tyume Security Services.jpeg" alt="Tyume Security Services"></a>
+  </div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#why">Why Us</a>
+    <a href="#team">Our Team</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:0614058792" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;vertical-align:middle"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.56 3.41 2 2 0 0 1 3.53 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call Now
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-company">Tyume Security Services</div>
+    <div class="hero-badge"><span class="pulse-dot"></span> South Africa's Trusted Security Partner</div>
+    <h1 class="hero-title">Protection<br>Is Our<br><em>Business.</em></h1>
+    <p class="hero-subtitle">Tactical security solutions for businesses and high-value sites across South Africa. Armed response, fully-equipped guards, and a free risk assessment — zero compromise.</p>
+    <div class="hero-actions">
+      <a href="tel:0614058792" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.56 3.41 2 2 0 0 1 3.53 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        061 405 8792
+      </a>
+      <a href="#offer" class="btn-secondary">Get Free Assessment
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll<div class="scroll-arrow"></div></div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Armed Response
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Free Risk Assessment
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    Monthly Reports
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    Site Visit Every Day
+  </div>
+  <div class="trust-item">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    Fully Equipped Guards
+  </div>
+</div>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-layout">
+    <div class="stats-intro reveal">
+      <div class="section-label">By The Numbers</div>
+      <h2 class="section-title">Built on <em>Results.</em></h2>
+      <p class="section-sub">Numbers don't lie. Every statistic represents a client who sleeps better at night.</p>
+    </div>
+    <div class="stats-grid reveal">
+      <div class="stat-card">
+        <div class="stat-num" data-target="100" data-suffix="%">0</div>
+        <div class="stat-label">Client Satisfaction</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="5" data-suffix="min">0</div>
+        <div class="stat-label">Response Time</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="24" data-suffix="/7">0</div>
+        <div class="stat-label">Always On Guard</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num" data-target="100" data-suffix="%">0</div>
+        <div class="stat-label">Equipment Provided</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Our <em>Services.</em></h2>
+    </div>
+    <p class="section-sub" style="margin-top:0">Every service is built around one goal: keeping your people, property, and assets safe.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal" onclick="toggleService(this)">
+      <div class="service-card-top">
+        <span class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <div class="service-title">Physical Security Guards</div>
+        <span class="service-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="service-body">
+        <p class="service-desc">Professionally trained, uniformed guards stationed at your site around the clock. Visible deterrence is your first line of defence.</p>
+        <span class="service-free">Includes Free Site Visit</span>
+      </div>
+    </div>
+    <div class="service-card reveal" onclick="toggleService(this)">
+      <div class="service-card-top">
+        <span class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+        <div class="service-title">Tactical Armed Response</div>
+        <span class="service-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="service-body">
+        <p class="service-desc">When seconds count, our armed response team is mobilised immediately. Fast, decisive, trained — because threats don't wait.</p>
+      </div>
+    </div>
+    <div class="service-card reveal" onclick="toggleService(this)">
+      <div class="service-card-top">
+        <span class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <div class="service-title">Risk Assessment Report</div>
+        <span class="service-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="service-body">
+        <p class="service-desc">We analyse your site's vulnerabilities and deliver a detailed, actionable report — completely free before you sign anything.</p>
+        <span class="service-free">Free Service</span>
+      </div>
+    </div>
+    <div class="service-card reveal" onclick="toggleService(this)">
+      <div class="service-card-top">
+        <span class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+        <div class="service-title">Daily Site Visits</div>
+        <span class="service-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="service-body">
+        <p class="service-desc">Our supervisors visit your site every day to verify standards, check guard performance, and ensure nothing slips through.</p>
+      </div>
+    </div>
+    <div class="service-card reveal" onclick="toggleService(this)">
+      <div class="service-card-top">
+        <span class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l5.5 5.5L12 6l5.5 5.5L23 6"/><path d="M1 18l5.5-5.5L12 18l5.5-5.5L23 18"/></svg></span>
+        <div class="service-title">Patrolling &amp; Monitoring</div>
+        <span class="service-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="service-body">
+        <p class="service-desc">Active foot and mobile patrols with digital patrol devices — real-time accountability with a traceable audit trail.</p>
+      </div>
+    </div>
+    <div class="service-card reveal" onclick="toggleService(this)">
+      <div class="service-card-top">
+        <span class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+        <div class="service-title">Monthly Reporting</div>
+        <span class="service-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+      </div>
+      <div class="service-body">
+        <p class="service-desc">Detailed monthly security reports so you always know what's happening — incidents, guard activity, and more.</p>
+        <span class="service-free">Free Service</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TYUME -->
+<section id="why">
+  <div class="why-grid">
+    <div class="why-image-wrap reveal">
+      <img src="img/men holding arms shotguns.jpeg" alt="Tyume Security Guard">
+      <div class="why-image-badge">Local &amp; Trusted<br>South Africa</div>
+    </div>
+    <div class="reveal">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">Security you can<br><em>rely on.</em></h2>
+      <div class="why-items">
+        <div class="why-item">
+          <div class="why-item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div class="why-item-text">
+            <h4>Armed &amp; Tactical Response</h4>
+            <p>Our guards aren't just a presence — they're trained to respond decisively to any threat, armed and ready when it matters most.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="why-item-text">
+            <h4>South African Owned &amp; Operated</h4>
+            <p>We understand the local landscape, threats, and community. Tyume is built here, for here — not a faceless national chain.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+          <div class="why-item-text">
+            <h4>Fully Equipped — No Hidden Costs</h4>
+            <p>Every guard arrives with a full kit: uniform, baton, radio, handcuffs, torch, and pepper spray. You pay for protection, not equipment.</p>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div class="why-item-text">
+            <h4>Free Risk Assessment Upfront</h4>
+            <p>Before you commit to anything, we assess your site and show you exactly where you're vulnerable — at no cost, no obligation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM CAROUSEL -->
+<section id="team">
+  <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto 0;">
+    <div class="section-label">Our People</div>
+    <h2 class="section-title">The Team Behind<br>Your <em>Safety.</em></h2>
+    <p class="section-sub" style="margin:16px auto 0;">Trained professionals. Diverse. Dedicated. Every guard on our roster is vetted, equipped, and ready.</p>
+  </div>
+  <div class="carousel-track-wrap">
+    <div class="carousel-track" id="carouselTrack">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section id="equipment">
+  <div class="equipment-layout">
+    <div class="reveal">
+      <div class="section-label">What They Carry</div>
+      <h2 class="section-title">Fully Equipped.<br><em>Always.</em></h2>
+      <p class="section-sub">Every Tyume guard arrives on-site with a complete standard kit — no extra cost to you, no shortcuts.</p>
+      <div class="equipment-grid">
+        <div class="equip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg> Uniform</div>
+        <div class="equip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg> Baton</div>
+        <div class="equip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l5.5 5.5L12 6l5.5 5.5L23 6"/><path d="M1 18l5.5-5.5L12 18l5.5-5.5L23 18"/></svg> Radio</div>
+        <div class="equip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Handcuffs</div>
+        <div class="equip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l2 4H7L9 2z"/><rect x="6" y="6" width="12" height="14" rx="2"/><line x1="12" y1="10" x2="12" y2="16"/></svg> Torch</div>
+        <div class="equip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Pepper Spray</div>
+        <div class="equip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Armed Response</div>
+        <div class="equip-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> Patrol Device</div>
+      </div>
+    </div>
+    <div class="equipment-image reveal">
+      <img src="img/metal detecter man .jpeg" alt="Security Guard Equipment">
+    </div>
+  </div>
+</section>
+
+<!-- FREE OFFER CTA -->
+<div id="offer">
+  <div class="offer-content reveal">
+    <h2>Get Your FREE<br>Risk Assessment Today.</h2>
+    <p>Don't wait for something to go wrong. Let our team assess your site's vulnerabilities before a threat does it for you. No cost. No obligation. No excuses.</p>
+  </div>
+  <div class="offer-cta reveal">
+    <a href="tel:0614058792" class="btn-dark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.56 3.41 2 2 0 0 1 3.53 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call 061 405 8792
+    </a>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="text-align:center; margin-bottom:60px;" class="reveal">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Protect Your<br><em>Business.</em></h2>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="contact-item">
+        <div class="contact-item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.56 3.41 2 2 0 0 1 3.53 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div class="contact-item-text">
+          <span>Calls</span>
+          <a href="tel:0614058792">061 405 8792</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="contact-item-text">
+          <span>Email</span>
+          <a href="mailto:tyumeservices@gmail.com">tyumeservices@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="contact-item-text">
+          <span>Address</span>
+          <p>No 1 IvyGcina Street, Tambo Village, Manenberg 7767, Cape Town</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="contact-item-text">
+          <span>WhatsApp</span>
+          <a href="https://wa.me/27683539560" target="_blank">068 353 9560</a>
+        </div>
+      </div>
+      <div style="margin-top:20px; border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,0.08);">
+        <img src="img/branded car.jpeg" alt="Tyume Security branded vehicle" style="width:100%;display:block;aspect-ratio:16/9;object-fit:cover;">
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <h3>Request a Free Assessment</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="John Smith">
+        </div>
+        <div class="form-group">
+          <label>Company</label>
+          <input type="text" placeholder="ABC Holdings">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+27 ...">
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Physical Security Guards</option>
+          <option>Armed Response</option>
+          <option>Risk Assessment</option>
+          <option>Patrol & Monitoring</option>
+          <option>Full Security Package</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell us about your site</label>
+        <textarea placeholder="Describe your site, current concerns, or any specific requirements..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="handleSubmit(event)">Request Free Assessment →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="img/LOGO Tyume Security Services.jpeg" alt="Tyume Security Services">
+  <p class="footer-text">© 2024 Tyume Security Services. All rights reserved. No 1 IvyGcina Street, Tambo Village, Manenberg 7767, Cape Town.</p>
+  <div class="footer-links">
+    <a href="tel:0614058792">061 405 8792</a>
+    <a href="mailto:tyumeservices@gmail.com">tyumeservices@gmail.com</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/27683539560" class="whatsapp-fab" target="_blank" title="WhatsApp Us">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ── NAV SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── SCROLL REVEAL ──
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// ── STAT COUNTER ──
+const counters = document.querySelectorAll('.stat-num');
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || '';
+      let current = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.innerHTML = Math.floor(current) + '<span class="stat-suffix">' + suffix + '</span>';
+      }, 25);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => countObserver.observe(c));
+
+// ── CAROUSEL ──
+const images = [
+  { src: 'img/man standing firm.jpeg', label: 'On-Site Guard' },
+  { src: 'img/2men standing strong.jpeg', label: 'Patrol Team' },
+  { src: 'img/baton man.jpeg', label: 'Armed Officer' },
+  { src: 'img/woman and man diverce workforce.jpeg', label: 'Diverse Workforce' },
+  { src: 'img/patrole man.jpeg', label: 'Mobile Patrol' },
+  { src: 'img/metal detecter man .jpeg', label: 'Access Control' },
+  { src: 'img/metle Detecter man infront of There clint.jpeg', label: 'Client Protection' },
+  { src: 'img/one man standing swelindam.jpeg', label: 'Site Security' },
+  { src: 'img/man siting in servalince room.jpeg', label: 'Surveillance Ops' },
+  { src: 'img/men holding arms shotguns.jpeg', label: 'Armed Response Unit' },
+];
+const track = document.getElementById('carouselTrack');
+// Duplicate for seamless loop
+[...images, ...images].forEach(img => {
+  const card = document.createElement('div');
+  card.className = 'carousel-card';
+  card.innerHTML = `
+    <img src="${img.src}" alt="${img.label}" loading="lazy">
+    <div class="carousel-card-overlay">
+      <div class="carousel-card-label">${img.label}</div>
+    </div>
+  `;
+  track.appendChild(card);
+});
+
+// ── SERVICE EXPAND ──
+function toggleService(card) {
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.service-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+// ── FORM SUBMIT ──
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target;
+  btn.textContent = '✅ Request Sent! We\'ll call you shortly.';
+  btn.style.background = '#1a2f5e';
+  btn.style.color = '#8dc63f';
+  btn.disabled = true;
+}
+</script>
+</body>
+</html>
